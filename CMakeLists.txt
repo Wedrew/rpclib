@@ -206,40 +206,6 @@ if(RPCLIB_BUILD_EXAMPLES)
   add_subdirectory(examples/calculator)
 endif()
 
-#
-# Cmake Package
-#
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/cmake/rpclibConfigVersion.cmake"
-  VERSION ${PROJECT_VERSION}
-  COMPATIBILITY AnyNewerVersion
-  )
-
-set(CONFIG_PACKAGE_LOCATION lib/cmake/rpclib)
-set(INCLUDE_INSTALL_DIR include/ )
-
-configure_package_config_file(cmake/rpclibConfig.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/cmake/rpclibConfig.cmake
-  INSTALL_DESTINATION ${CONFIG_PACKAGE_LOCATION}
-  PATH_VARS INCLUDE_INSTALL_DIR
-  )
-
-export(EXPORT rpclibTargets
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/rpclibTargets.cmake"
-  NAMESPACE rpclib::
-  )
-
-install(EXPORT rpclibTargets
-  FILE rpclibTargets.cmake
-  NAMESPACE rpclib::
-  DESTINATION ${CONFIG_PACKAGE_LOCATION}
-  )
-install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/cmake/rpclibConfig.cmake
-  ${CMAKE_CURRENT_BINARY_DIR}/cmake/rpclibConfigVersion.cmake
-  DESTINATION ${CONFIG_PACKAGE_LOCATION}
-  )
 
 #
 # Pkg-config
